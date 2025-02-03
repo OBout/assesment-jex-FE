@@ -1,0 +1,13 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.success {
+  color: green;
+}
+
+.error {
+  color: red;
+}

@@ -1,1 +1,25 @@
-<p>job-form works!</p>
+<h2>Maak een vacature</h2>
+
+<form [formGroup]="jobForm" (ngSubmit)="submitForm()">
+  <mat-form-field appearance="outline">
+    <mat-label>Titel</mat-label>
+    <input matInput formControlName="title" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Omschrijving</mat-label>
+    <textarea matInput formControlName="description"></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>KVK nummer</mat-label>
+    <input matInput formControlName="company" type="number" required />
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="jobForm.invalid">
+    Maak vacature
+  </button>
+
+  <p *ngIf="successMessage" class="success">{{ successMessage }}</p>
+  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+</form>
