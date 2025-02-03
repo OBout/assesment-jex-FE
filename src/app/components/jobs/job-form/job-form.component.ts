@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-job-form',
@@ -24,7 +25,7 @@ export class JobFormComponent {
   successMessage: string | null = null;
   errorMessage: string | null = null;
 
-  constructor(private fb: FormBuilder, private apiService: ApiService) {
+  constructor(private fb: FormBuilder, private apiService: ApiService, private router: Router) {
     this.jobForm = this.fb.group({
       title: ['', Validators.required],
       description: [''],
@@ -38,6 +39,7 @@ export class JobFormComponent {
         next: () => {
           this.successMessage = 'Vacature aangemaakt, thanks';
           this.jobForm.reset();
+          this.router.navigate(['/thanks']);
         },
         error: () => {
           this.errorMessage = 'Dit ging niet zo goed.';
