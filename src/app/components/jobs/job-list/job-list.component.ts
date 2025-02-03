@@ -1,11 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatTableModule } from '@angular/material/table';
+import { ApiService } from '../../../services/api.service';
 
 @Component({
   selector: 'app-job-list',
-  imports: [],
+  standalone: true,
   templateUrl: './job-list.component.html',
-  styleUrl: './job-list.component.scss'
+  styleUrls: ['./job-list.component.scss'],
+  imports: [CommonModule, MatTableModule]
 })
-export class JobListComponent {
+export class JobListComponent implements OnInit {
+  jobs: any[] = [];
+  displayedColumns: string[] = ['title', 'description', 'company'];
 
+  constructor(private apiService: ApiService) {}
+
+  ngOnInit() {
+    this.apiService.getJobs().subscribe({
+      next: (data) => (this.jobs = data),
+      error: (err) => console.error('Fout bij ophalen vacatures:', err)
+    });
+  }
 }
