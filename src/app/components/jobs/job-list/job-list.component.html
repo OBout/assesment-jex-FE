@@ -16,7 +16,6 @@
     <td mat-cell *matCellDef="let job"> {{ job.company }} </td>
   </ng-container>
 
-  <!-- ✅ Voeg dit toe -->
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </mat-table>
