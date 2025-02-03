@@ -4,3 +4,8 @@ export interface Job {
   description: string;
   company: number;
 }
+export interface Company {
+  id: number;
+  name: string;
+  address: string;
+}

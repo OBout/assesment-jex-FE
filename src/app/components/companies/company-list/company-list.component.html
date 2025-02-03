@@ -1,1 +1,29 @@
-<p>company-list works!</p>
+<h2>Bedrijven</h2>
+
+<mat-table [dataSource]="companies" class="mat-elevation-z8" *ngIf="companies.length > 0; else noCompanies">
+  <!-- Naam Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Naam </th>
+    <td mat-cell *matCellDef="let company"> {{ company.name }} </td>
+  </ng-container>
+
+  <!-- Adres Column -->
+  <ng-container matColumnDef="address">
+    <th mat-header-cell *matHeaderCellDef> Adres </th>
+    <td mat-cell *matCellDef="let company"> {{ company.address }} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</mat-table>
+
+<!-- Loading Spinner -->
+<mat-spinner *ngIf="loading"></mat-spinner>
+
+<!-- Error Message -->
+<p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+
+<!-- No Companies Available -->
+<ng-template #noCompanies>
+  <p>Geen bedrijven beschikbaar.</p>
+</ng-template>

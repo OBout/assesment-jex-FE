@@ -1,1 +1,31 @@
-<p>job-list works!</p>
+<h2>Vacatures</h2>
+
+<mat-table [dataSource]="jobs" class="mat-elevation-z8" *ngIf="jobs.length > 0; else noJobs">
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef> Titel </th>
+    <td mat-cell *matCellDef="let job"> {{ job.title }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef> Omschrijving </th>
+    <td mat-cell *matCellDef="let job"> {{ job.description || 'Geen omschrijving' }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="company">
+    <th mat-header-cell *matHeaderCellDef> KVK nummer </th>
+    <td mat-cell *matCellDef="let job"> {{ job.company }} </td>
+  </ng-container>
+
+  <!-- ✅ Voeg dit toe -->
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</mat-table>
+
+
+<mat-spinner *ngIf="loading"></mat-spinner>
+
+<!-- <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p> -->
+
+<ng-template #noJobs>
+  <p>Geen vacatures beschikbaar.</p>
+</ng-template>

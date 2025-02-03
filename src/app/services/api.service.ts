@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Job } from '../interfaces/interfaces';
+import { Job, Company } from '../interfaces/interfaces';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -17,6 +17,13 @@ export class ApiService {
   }
 
   createJob(job: Job): Observable<Job> {
-    return this.http.post<Job>(`${this.apiUrl}/jobs`, job);
+    const data = {
+      data: job
+    };
+    return this.http.post<Job>(`${this.apiUrl}/jobs`, data);
+  }
+
+  getCompanies(): Observable<{ data: Company[] }> {
+    return this.http.get<{ data: Company[] }>(`${this.apiUrl}/companies`);
   }
 }
